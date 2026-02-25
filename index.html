@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Radiant Blue Hope – Supporting Children with Diabetes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* ---------- GLOBAL STYLING ---------- */
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#0f4c81,#4facfe,#e6f4ff);
+color:#003366;
+scroll-behavior:smooth;
+}
+
+/* ---------- SPLASH SCREEN ---------- */
+#splash{
+position:fixed;
+width:100%;
+height:100vh;
+background:linear-gradient(135deg,#0f4c81,#4facfe);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+z-index:9999;
+animation:fadeOut 2.5s forwards;
+animation-delay:2s;
+}
+
+#splash h1{
+font-size:35px;
+animation:zoom 2s infinite alternate;
+}
+
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+/* ---------- HEADER ---------- */
+header{
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+color:#0f4c81;
+}
+
+nav{
+display:flex;
+gap:20px;
+}
+
+nav a{
+text-decoration:none;
+color:#0f4c81;
+font-weight:600;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#4facfe;
+}
+
+.hamburger{
+display:none;
+font-size:25px;
+cursor:pointer;
+}
+
+.mobile-nav{
+display:none;
+flex-direction:column;
+background:white;
+position:absolute;
+top:70px;
+right:30px;
+width:220px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+padding:15px;
+border-radius:10px;
+}
+
+.mobile-nav a{
+padding:10px 0;
+text-decoration:none;
+color:#0f4c81;
+font-weight:600;
+}
+
+/* ---------- SECTIONS ---------- */
+section{
+padding:60px 30px;
+margin:40px;
+background:white;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+h1,h2{
+color:#0f4c81;
+}
+
+img{
+width:100%;
+max-width:500px;
+border-radius:15px;
+margin-top:20px;
+}
+
+/* ---------- FORM ---------- */
+form input, form textarea, form select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 20px;
+background:#0f4c81;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#4facfe;
+}
+
+.checkbox-container{
+display:flex;
+align-items:flex-start;
+gap:10px;
+}
+
+.checkbox-container input{
+margin-top:4px;
+}
+
+/* ---------- COMMENTS DISPLAY ---------- */
+#commentDisplay{
+margin-top:20px;
+background:#f2f9ff;
+padding:15px;
+border-radius:10px;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+background:#003366;
+color:white;
+padding:40px;
+text-align:center;
+}
+
+@media(max-width:768px){
+nav{display:none;}
+.hamburger{display:block;}
+.mobile-nav.show{display:flex;}
+section{margin:20px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+<h1>Radiant Blue Hope 💙</h1>
+<p>Supporting Children with Diabetes</p>
+</div>
+
+<header>
+<div class="logo" onclick="location.href='index.html'">
+Radiant Blue Hope
+</div>
+
+<nav>
+<a href="home.html">Home</a>
+<a href="causes.html">Causes</a>
+<a href="precautions.html">Precautions</a>
+<a href="dailycare.html">Daily Care</a>
+<a href="medication.html">Medication</a>
+<a href="moralsupport.html">Moral Support</a>
+</nav>
+
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+
+<div class="mobile-nav" id="mobileMenu">
+<a href="home.html">Home</a>
+<a href="causes.html">Causes</a>
+<a href="precautions.html">Precautions</a>
+<a href="dailycare.html">Daily Care</a>
+<a href="medication.html">Medication</a>
+<a href="moralsupport.html">Moral Support</a>
+</div>
+</header>
+
+<section>
+<h1>Welcome 💙</h1>
+<p>This platform offers comfort, awareness, and strength for families managing childhood diabetes.</p>
+<img src="https://images.unsplash.com/photo-1588776814546-ec7e77d3a7c2">
+</section>
+
+<section>
+<h2>Share Your Experience</h2>
+
+<form id="storyForm">
+<input type="text" id="name" placeholder="Name (optional)">
+<input type="text" id="title" placeholder="Short title for your story">
+<textarea id="story" rows="4" placeholder="Your experience"></textarea>
+
+<div class="checkbox-container">
+<input type="checkbox" required>
+<label>
+I understand this website does not replace medical advice.
+</label>
+</div>
+
+<button type="submit">Submit Story</button>
+</form>
+
+<div id="commentDisplay"></div>
+</section>
+
+<section>
+<h2>Upload Your Support Video 🎥</h2>
+<input type="file" accept="video/*">
+</section>
+
+<footer>
+<p>For safety, please avoid sharing full names, addresses, or medical details like exact doses. Always consult your doctor for personal medical decisions.</p>
+<p>This website is created to offer comfort, motivation, and gentle guidance for children living with diabetes and the people who love them. It does not replace professional medical advice. For any medical questions, please contact your doctor or healthcare team.</p>
+<p>With care, courage, and kindness — every single day. 🌟</p>
+<p>© 2026 diabeticchowdary</p>
+</footer>
+
+<script>
+
+/* Hamburger toggle */
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("show");
+}
+
+/* Close when clicking outside */
+document.addEventListener("click", function(e){
+const menu = document.getElementById("mobileMenu");
+const hamburger = document.querySelector(".hamburger");
+if(!menu.contains(e.target) && !hamburger.contains(e.target)){
+menu.classList.remove("show");
+}
+});
+
+/* Comment Auto Append */
+document.getElementById("storyForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+let name = document.getElementById("name").value || "Anonymous";
+let title = document.getElementById("title").value;
+let story = document.getElementById("story").value;
+
+let commentBox = document.getElementById("commentDisplay");
+
+commentBox.innerHTML += `
+<hr>
+<h4>${title}</h4>
+<p><strong>${name}</strong></p>
+<p>${story}</p>
+`;
+
+this.reset();
+});
+
+</script>
+
+</body>
+</html>
