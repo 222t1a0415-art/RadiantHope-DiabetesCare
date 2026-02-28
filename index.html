@@ -7,7 +7,7 @@
 
 <style>
 
-/* ---------- GLOBAL STYLING ---------- */
+/* ---------- GLOBAL STYLING ---------- */  
 body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
@@ -119,15 +119,69 @@ border-radius:20px;
 box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-h1,h2{
+h1{
+color:whitesmoke;
+}
+
+h2{
 color:#0f4c81;
 }
 
 img{
-width:100%;
-max-width:500px;
+display:block;              /* allows centering */
+margin:20px auto;           /* centers image horizontally */
+width:85%;                  /* slightly smaller */
+max-width:420px;            /* reduced size */
 border-radius:15px;
-margin-top:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+img:hover{
+transform:scale(1.03);
+}
+
+/* ---------- CARD LAYOUT ---------- */
+
+.card-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+padding:20px;
+}
+
+.health-card{
+background:white;
+border-radius:18px;
+padding:20px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+transition:0.35s ease;
+}
+
+.health-card img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.health-card h3{
+color:#0f4c81;
+margin-bottom:10px;
+}
+
+.health-card p{
+color:#555;
+font-size:15px;
+line-height:1.6;
+}
+
+/* Hover animation */
+.health-card:hover{
+transform:translateY(-8px);
+box-shadow:0 18px 35px rgba(0,0,0,0.18);
 }
 
 /* ---------- FORM ---------- */
@@ -137,6 +191,12 @@ padding:12px;
 margin:10px 0;
 border-radius:10px;
 border:1px solid #ccc;
+}
+
+form{
+display:flex;
+flex-direction:column;
+align-items:stretch;
 }
 
 button{
@@ -153,14 +213,45 @@ button:hover{
 background:#4facfe;
 }
 
+/* --- Checkbox alignment FIX --- */
 .checkbox-container{
 display:flex;
-align-items:flex-start;
-gap:10px;
+align-items:center;
+justify-content:flex-start;
+gap:6px;
+margin-top:8px;
+margin-bottom:18px;   /* ✅ adds gap before submit button */
+width:100%;
 }
 
-.checkbox-container input{
-margin-top:4px;
+.checkbox-container input[type="checkbox"]{
+margin:0;
+width:auto;
+}
+
+.checkbox-container label{
+margin:0;
+font-size:15px;
+color:#003366;
+cursor:pointer;
+}
+
+.video-upload-box{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+background:#f4f9ff;
+padding:25px;
+border-radius:15px;
+margin:20px auto;
+max-width:600px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.video-checkbox{
+justify-content:center;
+margin-top:10px;
 }
 
 /* ---------- COMMENTS DISPLAY ---------- */
@@ -186,9 +277,179 @@ nav{display:none;}
 section{margin:20px;}
 }
 
+/* SECTION */
+.video-section{
+    padding:40px 20px;
+    text-align:center;
+}
+
+/* UPLOAD CARD */
+.upload-card{
+    background:white;
+    max-width:650px;
+    margin:auto;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* TEXT AREA */
+textarea{
+    width:100%;
+    height:110px;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    resize:none;
+    margin-bottom:15px;
+    font-size:15px;
+}
+
+/* BUTTON */
+.submit-btn{
+    background:#1e88e5;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.submit-btn:hover{
+    background:#1565c0;
+}
+
+/* VIDEO GALLERY */
+.video-gallery{
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+/* VIDEO CARD */
+.video-card{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.12);
+    text-align:left;
+}
+
+.video-card video{
+    width:100%;
+    border-radius:10px;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+}
+
+.like-btn, .delete-btn{
+    border:none;
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.like-btn{
+    background:#e3f2fd;
+}
+
+.delete-btn{
+    background:#ffebee;
+}
+
 </style>
 </head>
 
+<script>
+
+let videos = JSON.parse(localStorage.getItem("videos")) || [];
+
+function submitVideo(){
+
+    const text = document.getElementById("experience").value;
+    const file = document.getElementById("videoInput").files[0];
+
+    if(!text || !file){
+        alert("Please add experience and video.");
+        return;
+    }
+
+    const url = URL.createObjectURL(file);
+
+    const videoData = {
+        id: Date.now(),
+        text: text,
+        video: url,
+        likes: 0
+    };
+
+    videos.push(videoData);
+    localStorage.setItem("videos", JSON.stringify(videos));
+
+    displayVideos();
+
+    document.getElementById("experience").value="";
+    document.getElementById("videoInput").value="";
+}
+
+function displayVideos(){
+
+    const gallery = document.getElementById("videoGallery");
+    gallery.innerHTML="";
+
+    videos.forEach(v => {
+
+        gallery.innerHTML += `
+        <div class="video-card">
+
+            <video controls>
+                <source src="${v.video}">
+            </video>
+
+            <p>${v.text}</p>
+
+            <div class="actions">
+                <button class="like-btn"
+                    onclick="likeVideo(${v.id})">
+                    👍 ${v.likes}
+                </button>
+
+                <button class="delete-btn"
+                    onclick="deleteVideo(${v.id})">
+                    🗑 Delete
+                </button>
+            </div>
+
+        </div>`;
+    });
+}
+
+function likeVideo(id){
+    videos = videos.map(v=>{
+        if(v.id===id) v.likes++;
+        return v;
+    });
+    localStorage.setItem("videos", JSON.stringify(videos));
+    displayVideos();
+}
+
+function deleteVideo(id){
+    videos = videos.filter(v=>v.id!==id);
+    localStorage.setItem("videos", JSON.stringify(videos));
+    displayVideos();
+}
+
+displayVideos();
+
+</script>
 <body>
 
 <!-- SPLASH SCREEN -->
@@ -224,10 +485,32 @@ Radiant Blue Hope
 </header>
 
 <section>
-<h1>Welcome 💙</h1>
+<h2>Welcome 💙</h2>
 <p>This platform offers comfort, awareness, and strength for families managing childhood diabetes.</p>
-<img src="https://images.unsplash.com/photo-1588776814546-ec7e77d3a7c2">
+<img src="https://images.unsplash.com/photo-1511895426328-dc8714191300" alt="Parent and child smiling">
 </section>
+
+<div class="card-container">
+
+  <div class="health-card">
+      <img src="https://images.unsplash.com/photo-1609220136736-443140cffec6">
+      <h3>Family Support</h3>
+      <p>Emotional care and understanding help children live confidently with diabetes.</p>
+  </div>
+
+  <div class="health-card">
+      <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54">
+      <h3>Doctor Guidance</h3>
+      <p>Regular consultation ensures safe and healthy diabetes management.</p>
+  </div>
+
+  <div class="health-card">
+      <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322">
+      <h3>Healthy Lifestyle</h3>
+      <p>Balanced nutrition and activity help children grow strong every day.</p>
+  </div>
+
+</div>
 
 <section>
 <h2>Share Your Experience</h2>
@@ -237,12 +520,6 @@ Radiant Blue Hope
 <input type="text" id="title" placeholder="Short title for your story">
 <textarea id="story" rows="4" placeholder="Your experience"></textarea>
 
-<div class="checkbox-container">
-<input type="checkbox" required>
-<label>
-I understand this website does not replace medical advice.
-</label>
-</div>
 
 <button type="submit">Submit Story</button>
 </form>
@@ -250,9 +527,30 @@ I understand this website does not replace medical advice.
 <div id="commentDisplay"></div>
 </section>
 
-<section>
-<h2>Upload Your Support Video 🎥</h2>
-<input type="file" accept="video/*">
+<section class="video-section">
+
+    <h2>Upload Your Support Video 🎥</h2>
+
+    <div class="upload-card">
+
+        <input type="file" id="videoInput" accept="video/*">
+
+        <button onclick="submitVideo()" class="submit-btn">
+            Submit Video 💙
+        </button>
+
+    </div>
+
+    <!-- Saved Videos -->
+    <div id="videoGallery" class="video-gallery"></div>
+
+    <div class="checkbox-container video-checkbox">
+       <input type="checkbox" id="videoConsent" required>
+        <label for="videoConsent">
+           I understand this website does not replace medical advice.
+        </label>
+    </div>
+
 </section>
 
 <footer>
@@ -261,6 +559,15 @@ I understand this website does not replace medical advice.
 <p>With care, courage, and kindness — every single day. 🌟</p>
 <p>© 2026 diabeticchowdary</p>
 </footer>
+
+const uploadBtn = document.getElementById("uploadBtn");
+const consent = document.getElementById("videoConsent");
+
+uploadBtn.disabled = true;
+
+consent.addEventListener("change",()=>{
+uploadBtn.disabled = !consent.checked;
+});
 
 <script>
 
@@ -301,5 +608,4 @@ this.reset();
 </script>
 
 </body>
-
 </html>
