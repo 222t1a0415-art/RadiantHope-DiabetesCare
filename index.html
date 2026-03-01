@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -400,7 +399,66 @@ textarea{
     margin-top: 4px;
     transform: scale(0.9);
 }
- 
+
+/* Upload container */
+.upload-container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* File input spacing */
+.file-input {
+    display: block;
+    margin: 15px auto;
+}
+
+/* Submit button */
+.upload-btn {
+    margin-top: 10px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Checkbox alignment */
+.disclaimer-check {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* =============================
+   MOBILE RESPONSIVE FIX
+============================= */
+@media (max-width: 768px) {
+
+    /* Space between file and button */
+    .file-input {
+        margin-bottom: 18px;
+    }
+
+    .upload-btn {
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    /* Checkbox + text alignment */
+    .disclaimer-check {
+        align-items: flex-start;
+        font-size: 14px;
+    }
+
+    .disclaimer-check input {
+        margin-top: 4px;
+        transform: scale(0.9);
+    }
+}
+
 </style>
 </head>
 
@@ -564,28 +622,28 @@ Radiant Blue Hope
 </section>
 
 <section class="video-section">
+    <h2>Upload Your Support Video 🎥</h2>
+    <div class="upload-container">
 
     <h2>Upload Your Support Video 🎥</h2>
 
-    <div class="upload-card">
+    <!-- File Upload -->
+    <input type="file" id="videoFile" class="file-input">
 
-        <input type="file" id="videoInput" accept="video/*">
+    <!-- Submit Button -->
+    <button id="uploadBtn" class="upload-btn">
+        Submit Video 💙
+    </button>
 
-        <button onclick="submitVideo()" class="submit-btn">
-            Submit Video 💙
-        </button>
-
-    </div>
-
-    <!-- Saved Videos -->
-    <div id="videoGallery" class="video-gallery"></div>
-
-    <div class="checkbox-container video-checkbox">
-       <input type="checkbox" id="videoConsent" required>
+    <!-- Disclaimer -->
+    <div class="disclaimer-check">
+        <input type="checkbox" id="videoConsent">
         <label for="videoConsent">
-           I understand this website does not replace medical advice.
+            I understand this website does not replace medical advice.
         </label>
     </div>
+
+</div>>
 
 </section>
 
@@ -639,5 +697,18 @@ commentBox.innerHTML += `
 this.reset();
 });
 </script>
+
+<script>
+const uploadBtn = document.getElementById("uploadBtn");
+const consent = document.getElementById("videoConsent");
+
+uploadBtn.disabled = true;
+
+consent.addEventListener("change", () => {
+    uploadBtn.disabled = !consent.checked;
+});
+</script>
+    
 </body>
 </html>
+
