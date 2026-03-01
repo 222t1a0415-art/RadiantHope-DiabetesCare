@@ -365,6 +365,56 @@ textarea{
     background:#ffebee;
 }
 
+.upload-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* desktop spacing */
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+    .upload-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;   /* 👈 space between choose file & button */
+        width: 100%;
+    }
+
+    .submit-btn {
+        width: 100%;
+        max-width: 260px;
+    }
+}
+
+.disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: left;
+    line-height: 1.5;
+}
+
+/* checkbox size */
+.disclaimer input[type="checkbox"] {
+    margin-top: 4px;
+    transform: scale(0.9);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .disclaimer {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+}
+
+input[type="file"] {
+    padding: 8px;
+    border-radius: 8px;
+    background: #111;
+    color: white;
+}
+    
 </style>
 </head>
 
@@ -490,6 +540,11 @@ Radiant Blue Hope
 <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300" alt="Parent and child smiling">
 </section>
 
+<div class="upload-controls">
+    <input type="file" id="videoFile">
+    <button class="submit-btn">Submit Video 💙</button>
+</div>
+    
 <div class="card-container">
 
   <div class="health-card">
@@ -553,6 +608,13 @@ Radiant Blue Hope
 
 </section>
 
+<label class="disclaimer">
+    <input type="checkbox">
+    <span>
+        I understand this website does not replace medical advice.
+    </span>
+</label>
+
 <footer>
 <p>For safety, please avoid sharing full names, addresses, or medical details like exact doses. Always consult your doctor for personal medical decisions.</p>
 <p>This website is created to offer comfort, motivation, and gentle guidance for children living with diabetes and the people who love them. It does not replace professional medical advice. For any medical questions, please contact your doctor or healthcare team.</p>
@@ -610,4 +672,5 @@ this.reset();
 
 </body>
 </html>
+
 
