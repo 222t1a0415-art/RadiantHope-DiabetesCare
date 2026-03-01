@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -484,28 +485,6 @@ function deleteVideo(id){
 
 displayVideos();
 
-/* Checkbox alignment */
-.disclaimer-check {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-align: left;
-}
-
-/* Better mobile alignment */
-@media (max-width: 768px) {
-
-  .disclaimer-check {
-      align-items: flex-start;
-  }
-
-  .disclaimer-check input {
-      margin-top: 4px;
-      transform: scale(0.9);
-  }
-
-}
-    
 </script>
 <body>
 
@@ -601,9 +580,9 @@ Radiant Blue Hope
     <!-- Saved Videos -->
     <div id="videoGallery" class="video-gallery"></div>
 
-    <div class="checkbox-container video-checkbox; disclaimer-check">
-       <input type="checkbox" id="videoConsent; agree" required>
-        <label for="videoConsent; agree">
+    <div class="checkbox-container video-checkbox">
+       <input type="checkbox" id="videoConsent" required>
+        <label for="videoConsent">
            I understand this website does not replace medical advice.
         </label>
     </div>
@@ -650,23 +629,15 @@ e.preventDefault();
 let name = document.getElementById("name").value || "Anonymous";
 let title = document.getElementById("title").value;
 let story = document.getElementById("story").value;
-
 let commentBox = document.getElementById("commentDisplay");
-
 commentBox.innerHTML += `
 <hr>
 <h4>${title}</h4>
 <p><strong>${name}</strong></p>
 <p>${story}</p>
 `;
-
 this.reset();
 });
-
 </script>
-
 </body>
 </html>
-
-
-
