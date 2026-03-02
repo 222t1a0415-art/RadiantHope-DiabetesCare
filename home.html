@@ -307,6 +307,73 @@ margin:15px auto;
 line-height:1.8;
 }
 
+/* ===== FAQ HOSPITAL STYLE ===== */
+
+.faq-section{
+background:#f7fbff;
+padding:60px 20px;
+margin:30px;
+border-radius:16px;
+box-shadow:0 6px 22px rgba(0,0,0,0.08);
+}
+
+.faq-section h2{
+text-align:center;
+color:#0f4c81;
+margin-bottom:10px;
+}
+
+.faq-intro{
+text-align:center;
+max-width:700px;
+margin:0 auto 30px;
+color:#555;
+}
+
+.faq-container{
+max-width:800px;
+margin:auto;
+}
+
+.faq-item{
+background:white;
+margin-bottom:12px;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 12px rgba(0,0,0,0.08);
+}
+
+.faq-question{
+width:100%;
+background:white;
+border:none;
+padding:18px;
+font-size:16px;
+font-weight:bold;
+color:#0f4c81;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+}
+
+.faq-question:hover{
+background:#eef6ff;
+}
+
+.faq-answer{
+max-height:0;
+overflow:hidden;
+transition:max-height 0.35s ease;
+padding:0 18px;
+}
+
+.faq-answer p{
+margin:15px 0;
+color:#444;
+line-height:1.6;
+}
+
 </style>
 </head>
 <body>
@@ -395,7 +462,79 @@ and independence.
 Education, encouragement, and kindness from families, teachers,
 and healthcare providers make a powerful difference in a child’s life.
 </p>
-<img src="images.jpg"alt="Happy child playing">
+<img src="C:\Users\darap\OneDrive\Desktop\HTML\images.jpg"alt="Happy child playing">
+</div>
+</section>
+
+<!-- ===== HOSPITAL FAQ SECTION ===== -->
+<section class="faq-wrapper">
+<div class="main-card"></div>
+<h2>Frequently Asked Questions (FAQ)</h2>
+<p class="faq-intro">
+Common questions parents and caregivers ask about childhood diabetes.
+This information is educational and does not replace medical advice.
+</p>
+<div class="faq-container">
+<div class="faq-item">
+<button class="faq-question">
+What is childhood diabetes?
+<span>+</span>
+</button>
+<div class="faq-answer">
+<p>
+Childhood diabetes occurs when the body cannot properly regulate blood sugar levels.
+Type 1 diabetes is most common in children and requires insulin therapy and daily monitoring.
+</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">
+What are early warning signs?
+<span>+</span>
+</button>
+<div class="faq-answer">
+<p>
+Common signs include increased thirst, frequent urination, unexplained weight loss,
+fatigue, irritability, and blurred vision. Early diagnosis helps prevent complications.
+</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">
+Can children with diabetes live normal lives?
+<span>+</span>
+</button>
+<div class="faq-answer">
+<p>
+Yes. With proper insulin management, balanced nutrition, physical activity,
+and emotional support, children with diabetes can study, play, and grow normally.
+</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">
+Is diabetes caused by eating sugar?
+<span>+</span>
+</button>
+<div class="faq-answer">
+<p>
+No. Type 1 diabetes is an autoimmune condition and is not caused by eating sweets.
+Healthy eating habits still play an important role in management.
+</p>
+</div>
+</div>
+<div class="faq-item">
+<button class="faq-question">
+When should parents contact a doctor urgently?
+<span>+</span>
+</button>
+<div class="faq-answer">
+<p>
+Seek medical help if the child experiences vomiting, deep breathing,
+extreme tiredness, confusion, or very high blood sugar readings.
+</p>
+</div>
+</div>
 </div>
 </section>
 
@@ -410,7 +549,6 @@ and healthcare providers make a powerful difference in a child’s life.
 function toggleMenu(){
 document.getElementById("mobileMenu").classList.toggle("show");
 }
-
 document.addEventListener("click", function(e){
 const menu = document.getElementById("mobileMenu");
 const hamburger = document.querySelector(".hamburger");
@@ -420,6 +558,21 @@ menu.classList.remove("show");
 });
 </script>
 
+<script>
+document.querySelectorAll(".faq-question").forEach(btn=>{
+btn.addEventListener("click",()=>{
+const answer = btn.nextElementSibling;
+const symbol = btn.querySelector("span");
+if(answer.style.maxHeight){
+answer.style.maxHeight = null;
+symbol.textContent = "+";
+}else{
+answer.style.maxHeight = answer.scrollHeight + "px";
+symbol.textContent = "−";
+}
+});
+});
+</script>
+
 </body>
 </html>
-
