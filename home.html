@@ -13,6 +13,74 @@ background: linear-gradient(135deg,#0f4c81,#4facfe,#ffffff);
 color:#003366;
 }
 
+/* container spacing */
+section{
+background:var(--card-bg);
+padding:55px 25px;
+margin:35px auto;
+max-width:1000px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+transition:0.3s ease;
+}
+
+section:hover{
+transform:translateY(-3px);
+box-shadow:0 12px 30px rgba(0,0,0,0.12);
+}
+
+.section-header{
+text-align:center;
+margin-bottom:30px;
+}
+
+.section-header h2{
+font-size:30px;
+color:var(--primary);
+margin-bottom:10px;
+}
+
+.section-header p{
+color:var(--text-light);
+max-width:650px;
+margin:auto;
+}
+
+.causes-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.cause-card{
+background:#f7fbff;
+padding:22px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.cause-card:hover{
+transform:translateY(-5px);
+}
+
+.cause-icon{
+font-size:32px;
+margin-bottom:12px;
+}
+
+.cause-card h3{
+color:var(--primary);
+margin-bottom:10px;
+}
+
+.cause-card p{
+font-size:15px;
+color:var(--text-light);
+}
+
 header{
 background:white;
 display:flex;
@@ -69,18 +137,35 @@ font-weight:bold;
 }
 
 section{
-padding:50px 20px;
+max-width:900px;
+margin:30px auto;
+padding:35px 25px;
 background:white;
-margin:30px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+text-align:center;
+transition:0.3s ease;
+}
+
+section:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 30px rgba(0,0,0,0.12);
 }
 
 img{
-width:100%;
-max-width:400px;
-border-radius:15px;
-margin-top:20px;
+display:block;
+width:80%;
+max-width:300px;
+height:220px;          
+object-fit:cover;      
+margin:20px auto;
+border-radius:14px;
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
+transition:0.3s ease;
+}
+
+img:hover{
+transform:scale(1.03);
 }
 
 form input, form textarea, form select{
@@ -109,12 +194,122 @@ text-align:center;
 nav{display:none;}
 .hamburger{display:block;}
 .mobile-nav.show{display:flex;}
+
+.section-header h2{
+font-size:24px;
 }
+
+img{
+height:200px;
+width:95%;
+}
+
+section{
+margin:20px 12px;
+padding:25px 18px;
+}
+
+img{
+width:95%;
+max-width:260px;
+height:180px;   /* smaller for mobile */
+}
+
+h1{
+font-size:22px;
+}
+
+p{
+font-size:15px;
+line-height:1.6;
+}
+
+}
+
+/* Page fade animation */
+body{
+animation:fadeInPage 0.7s ease;
+}
+
+@keyframes fadeInPage{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.section-title{
+font-size:28px;
+color:#0f4c81;
+margin-bottom:10px;
+position:relative;
+display:inline-block;
+}
+
+.section-title::after{
+content:"";
+display:block;
+width:60%;
+height:3px;
+background:linear-gradient(90deg,#4facfe,#0f4c81);
+margin:8px auto 0;
+border-radius:5px;
+}
+
+.icon-badge{
+font-size:28px;
+background:#eaf4ff;
+color:#0f4c81;
+width:60px;
+height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto 15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* EDUCATIONAL CONTENT STYLE */
+
+.info-block{
+max-width:750px;
+margin:40px auto;
+text-align:center;
+line-height:1.7;
+color:#003366;
+}
+
+.info-block h2{
+color:#0f4c81;
+margin-bottom:15px;
+}
+
+.info-block img{
+width:100%;
+max-width:420px;
+height:240px;
+object-fit:cover;
+border-radius:15px;
+margin:20px auto;
+display:block;
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+.info-list{
+text-align:left;
+max-width:600px;
+margin:15px auto;
+line-height:1.8;
+}
+
 </style>
 </head>
-
 <body>
-
 <header>
 <div class="logo" onclick="location.href='index.html'">
 Radiant Blue Hope
@@ -128,9 +323,7 @@ Radiant Blue Hope
 <a href="medication.html">Medication</a>
 <a href="moralsupport.html">Moral Support</a>
 </nav>
-
 <div class="hamburger" onclick="toggleMenu()">☰</div>
-
 <div class="mobile-nav" id="mobileMenu">
 <a href="home.html">Home</a>
 <a href="causes.html">Causes</a>
@@ -142,9 +335,68 @@ Radiant Blue Hope
 </header>
 
 <section>
-<h1>Understanding Childhood Diabetes</h1>
+<div class="icon-badge">💙</div>
+<h1 class="section-title">Understanding Childhood Diabetes</h1>
 <p>Childhood diabetes is manageable with awareness, support, and proper care.</p>
-<img src="https://images.unsplash.com/photo-1603398938378-5b1d94b0f1f3">
+<img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9" alt="Family happiness">
+
+<div class="info-block">
+<h2>What is Childhood Diabetes?</h2>
+<p>
+Childhood diabetes is a long-term health condition where a child’s body
+cannot properly regulate blood sugar (glucose) levels. Glucose gives
+energy to the body, but it needs insulin — a hormone produced by the pancreas —
+to enter the cells safely.
+</p>
+<img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df"
+alt="Doctor caring for child">
+<p>
+In children with diabetes, insulin may not be produced or may not work
+effectively. With proper care, monitoring, and family support, children
+can live active, healthy, and joyful lives.
+</p>
+</div>
+
+<div class="info-block">
+<h2>Types of Diabetes in Children</h2>
+<ul class="info-list">
+<strong>Type 1 Diabetes:</strong> The immune system attacks insulin-producing cells. Children require daily insulin therapy.<br>
+<strong>Type 2 Diabetes:</strong> The body becomes resistant to insulin, often linked to lifestyle and genetics.<br>
+<strong>Monogenic Diabetes:</strong> A rare genetic form affecting insulin production.<br>
+</ul>
+<img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef"alt="Child healthcare consultation">
+</div>
+
+<div class="info-block">
+<h2>Why Early Awareness Matters</h2>
+<p>
+Early diagnosis helps prevent serious complications such as dehydration,
+diabetic ketoacidosis, and long-term health risks. Parents and caregivers
+play a vital role in recognizing symptoms early.
+</p>
+<ul class="info-list">
+✔ Prevents medical emergencies<br>
+✔ Improves treatment success<br>
+✔ Supports emotional wellbeing<br>
+✔ Helps children adapt confidently<br>
+</ul>
+<img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e"alt="Happy family support">
+</div>
+
+<div class="info-block">
+<h2>Living a Healthy Life with Diabetes</h2>
+<p>
+Children with diabetes can participate in school, sports, travel,
+and social activities just like other children. A supportive
+environment and consistent care routines help build confidence
+and independence.
+</p>
+<p>
+Education, encouragement, and kindness from families, teachers,
+and healthcare providers make a powerful difference in a child’s life.
+</p>
+<img src="C:\Users\darap\OneDrive\Desktop\HTML\images.jpg"alt="Happy child playing">
+</div>
 </section>
 
 <footer>
